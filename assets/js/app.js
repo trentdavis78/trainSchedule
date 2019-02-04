@@ -12,12 +12,12 @@ $(document).ready(function () {
 
     var db = firebase.database();
 
-    function saveToFirebase(name, role, startDate, monthlyRate) {
+    function saveToFirebase(name, dest, start, freq) {
         var creds = {
             name,
-            role,
-            startDate,
-            monthlyRate
+            dest,
+            start,
+            freq
         };
 
         db.ref().push().set(creds)
@@ -32,10 +32,10 @@ $(document).ready(function () {
     $("#submit").on("click", function (e) {
         e.preventDefault();
         var name = $("#name").val();
-        var role = $("#role").val();
-        var startDate = $("#startDate").val();
-        var monthlyRate = $("#monthlyRate").val();
-        saveToFirebase(name, role, startDate, monthlyRate);
+        var dest = $("#dest").val();
+        var start = $("#start").val();
+        var freq = $("#freq").val();
+        saveToFirebase(name, dest, start, freq);
         $('#signinForm').trigger("reset");
     });
 
@@ -44,10 +44,10 @@ $(document).ready(function () {
 
         var html = "<tr>";
         html += "<td>" + sv.name + "</td>";
-        html += "<td>" + sv.role + "</td>";
-        html += "<td>" + sv.startDate + "</td>";
+        html += "<td>" + sv.dest + "</td>";
+        html += "<td>" + sv.start + "</td>";
         html += "<td></td>";
-        html += "<td>" + sv.monthlyRate + "</td>";
+        html += "<td>" + sv.freq + "</td>";
         html += "<td></td>";
         $("#tbody").append(html);
     });
