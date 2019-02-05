@@ -44,14 +44,16 @@ a {
 }
 
 .panel {
-	border-color: #003a5d;
+	border-color: #000;
 }
 
 .panel-heading {
-	background-color: #003a5d;
+    background-color: #000;
+    color: #fff;
+    padding: .5rem;
 }
 
-.submitInput {
+#submit, #addTrain {
 	background-color: #557a91;
 }
 .addTrain button {

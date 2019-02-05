@@ -59,12 +59,12 @@
                     </div>
                 </div>
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                <div class="modal fade" id="addTrainModal" tabindex="-1" role="dialog" aria-labelledby="addTrainModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Add Train</h5>
+                                <h5 class="modal-title" id="addTrainModalLabel">Add Train</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -73,19 +73,19 @@
                                 <form>
                                     <div class="form-group">
                                         <label for="trainName">Train Name</label>
-                                        <input type="text" class="formControl" id="name" placeholder="Enter a Train">
+                                        <input type="text" class="formControl" id="name">
                                     </div>
                                     <div class="form-group">
                                         <label for="destForm">Destination</label>
-                                        <input type="text" class="formControl" id="dest" placeholder="City, State">
+                                        <input type="text" class="formControl" id="dest">
                                     </div>
                                     <div class="form-group">
                                         <label for="firstTrain">First Train Time (HHMM 24 Hour Format)</label>
-                                        <input type="number" class="formControl" id="start" placeholder="eg. 1430">
+                                        <input type="number" class="formControl" id="start">
                                     </div>
                                     <div class="form-group">
                                         <label for="freqForm">Frequency (in mins.)</label>
-                                        <input type="number" class="formControl" id="freq" placeholder="eg. 30 minutes">
+                                        <input type="number" class="formControl" id="freq" >
                                     </div>
                                 </form>
                             </div>
@@ -99,7 +99,7 @@
             </div>
             <div class="d-flex justify-content-end bd-highlight my-3">
                     <div class="p-2 bd-highlight">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <button id="addTrain" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTrainModal">
                            Add Train
                           </button>
                     </div>                  
