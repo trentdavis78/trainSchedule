@@ -21,14 +21,12 @@ $(document).ready(function () {
         };
 
         db.ref().push().set(creds)
-
             .then(function (snap) {
                 console.log("Success!");
             }, function (err) {
                 console.log(err + " error");
             });
     }
-
     $("#submit").on("click", function (e) {
         e.preventDefault();
         var name = $("#name").val();
@@ -40,15 +38,27 @@ $(document).ready(function () {
     });
 
     db.ref().on("child_added", function (snap) {
-        var sv = snap.val();
+        var sv = snap.val();  
+        var freq = sv.freq;
+        freq = parseInt(freq);
+        var now = moment();
+        var startTime = moment(sv.start, "HHmm");
+        startTime = moment(startTime).format("HH:mm");
+        var startTimeConvert = moment(startTime, "HHmm");
+		var timeDifference = moment().diff(moment(startTimeConvert), "minutes");
+        var timeRemaining = timeDifference % freq;
+        var timeAway = freq - timeRemaining;
+        var nextArrival = moment().add(timeAway, "minutes");
+        var arrivalDisplay = moment(nextArrival).format("HH:mm");
 
         var html = "<tr>";
         html += "<td>" + sv.name + "</td>";
         html += "<td>" + sv.dest + "</td>";
-        html += "<td>" + sv.start + "</td>";
-        html += "<td></td>";
+        html += "<td>" + startTime + "</td>";
         html += "<td>" + sv.freq + "</td>";
-        html += "<td></td>";
+        html += "<td> " + arrivalDisplay + "</td>";
+        html += "<td>" + timeAway + "</td>";
+        
         $("#tbody").append(html);
     });
 });

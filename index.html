@@ -16,53 +16,106 @@
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
 </head>
+
 <body>
-    <div class="container">
-        <div class="jumbotron">
-            <h3>Train Schedule</h3>           
-        </div>
-        <div class="card">
-            <h5 class="card-header">Current Train Schedule</h5>
-            <div class="card-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Train Name</th>
-                            <th scope="col">Destination</th>
-                            <th scope="col">Frequency (min)</th>
-                            <th scope="col">Next Arrival</th>
-                            <th scope="col">Minutes Away</th>                           
-                        </tr>
-                    </thead>
-                    <tbody id="tbody"></tbody>
-                </table>
+    <div class="container pageWrapper">
+        <!-- Header Div -->
+        <header>
+            <div class="container">
+                <div class="jumbotron">
+                    <h1>Train Scheduler</h1>
+                </div>
             </div>
-        </div>
-        <div class="card">
-            <h5 class="card-header">Add Train</h5>
-            <div class="card-body">
-                <form id="signinForm">
-                    <div class="form-group">
-                        <label for="name">Train Name </label>
-                        <input type="text" class="form-control" id="name">
-                    </div>
-                    <div class="form-group">
-                        <label for="dest">Destination</label>
-                        <input type="text" class="form-control" id="dest">
-                    </div>
-                    <div class="form-group">
-                        <label for="start">First Train Time (HH:mm - military time)</label>
-                        <input type="text" class="form-control" id="start">
-                    </div>
-                    <div class="form-group">
-                        <label for="freq">Frequency (min)</label>
-                        <input type="text" class="form-control" id="freq">
-                    </div>
-                    <button id="submit" type="submit" class="btn btn-primary">Submit</button>
-                </form>
+        </header>
+        <div class="container bodyContent">
+            <div class="row pageRow">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <!-- background?-->
+                </div>
             </div>
+            <div class="row pageRow">
+                <!-- <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 scheduleBoard"> -->
+                <div class="col-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4>Train Schedule</h4>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-hover table-fluid" id="boardTable">
+                                <thead>
+                                    <tr>
+                                        <th>Train Name</th>
+                                        <th>Destination</th>
+                                        <th>Start Time</th>
+                                        <th>Frequency (mins)</th>
+                                        <th>Next Arrival (HHMM)</th>
+                                        <th>Minutes Away</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Add Train</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="trainName">Train Name</label>
+                                        <input type="text" class="formControl" id="name" placeholder="Enter a Train">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="destForm">Destination</label>
+                                        <input type="text" class="formControl" id="dest" placeholder="City, State">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="firstTrain">First Train Time (HHMM 24 Hour Format)</label>
+                                        <input type="number" class="formControl" id="start" placeholder="eg. 1430">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="freqForm">Frequency (in mins.)</label>
+                                        <input type="number" class="formControl" id="freq" placeholder="eg. 30 minutes">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button id="submit" class="btn btn-primary">Submit</button>
+                                <button id="reset" class="btn btn-secondary">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end bd-highlight my-3">
+                    <div class="p-2 bd-highlight">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                           Add Train
+                          </button>
+                    </div>                  
+                  </div>
         </div>
     </div>
+    <!-- Footer Div -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 footer">
+                    <p>Made with &hearts; in Round Rock, TX</p>
+                </div>
+            </div>
+        </div>
+    </footer>
     <!-- begin js files -->
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
@@ -71,7 +124,7 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>
-        <script src="assets/js/moment.min.js"></script>
+    <script src="assets/js/moment.min.js"></script>
     <script src="assets/js/app.js"></script>
     <!-- end js files -->
 </body>
